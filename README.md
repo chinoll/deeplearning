@@ -5,4 +5,6 @@
 生成器的最后一层为Tanh函数生成的效果 <br>
 ![dcgan](https://github.com/chinoll/deeplearning/raw/master/imgs/dcgan.png) <br>
 将生成器的最后一层换成LRelu之后生成的图像质量更差劲<br>
-![dcgan_lrelu](https://github.com/chinoll/deeplearning/raw/master/imgs/dcgan_lrelu.png)
+![dcgan_lrelu](https://github.com/chinoll/deeplearning/raw/master/imgs/dcgan_lrelu.png) <br>
+将leakyRelu换成Relu之后生成的图像<br>
+![dcgan_relu](https://github.com/chinoll/deeplearning/raw/master/imgs/dcgan_relu.png) <br>
