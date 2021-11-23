@@ -13,27 +13,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 import visdom
+from config import *
+from utils import *
 os.makedirs("images",exist_ok=True)
-
-
-epochs = 200
-batch_size = 512
-lr = 0.0002
-b1 = 0.5
-b2 = 0.999
-n_cpu = 8
-latent_dim = 100
-img_size = 32
-channels = 1
-sample_interval = 400
-
-def weights_init_normal(m):
-    classname = m.__class__.__name__
-    if classname.find("Conv") != -1:
-        torch.nn.init.normal_(m.weight.data, 0.0, 0.02)
-    elif classname.find("BatchNorm2d") != -1:
-        torch.nn.init.normal_(m.weight.data, 1.0, 0.02)
-        torch.nn.init.constant_(m.bias.data, 0.0)
 
 class Generator(nn.Module):
     def __init__(self):
@@ -95,7 +77,6 @@ discriminator.cuda()
 generator.apply(weights_init_normal)
 discriminator.apply(weights_init_normal)
 
-os.makedirs("images", exist_ok=True)
 vis = visdom.Visdom(env='dcgan')
 
 dataloaer = DataLoader(datasets.MNIST('./images', train=True, download=True,
