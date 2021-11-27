@@ -101,9 +101,8 @@ for epoch in range(epochs):
         for p in discriminator.parameters():
             p.data.clamp_(-clamp, clamp)
 
-        #g_optimizer.zero_grad()
+        g_optimizer.zero_grad()
         if i % n_critic == 0:
-            g_optimizer.zero_grad()
             fake_imgs = generator(noise)
             g_loss = -torch.mean(discriminator(fake_imgs))
             g_loss.backward()
