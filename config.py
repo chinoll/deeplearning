@@ -1,4 +1,4 @@
-epochs = 100
+epochs = 200
 batch_size = 128
 lr = 0.00005
 b1 = 0.5

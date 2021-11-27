@@ -8,3 +8,8 @@
 ![dcgan_lrelu](https://github.com/chinoll/deeplearning/raw/master/imgs/dcgan_lrelu.png) <br>
 将leakyRelu换成Relu之后生成的图像<br>
 ![dcgan_relu](https://github.com/chinoll/deeplearning/raw/master/imgs/dcgan_relu.png) <br>
+
+## Wasserstein  GAN(WGAN)
+生成效果并不好
+![wgan](https://github.com/chinoll/deeplearning/raw/master/imgs/wgan.png) <br>
+在添加batchnorm之后，模式崩溃了<br>
