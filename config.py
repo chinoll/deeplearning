@@ -1,6 +1,6 @@
 epochs = 200
 batch_size = 128
-lr = 0.00005
+lr = 0.0002
 b1 = 0.5
 b2 = 0.999
 n_cpu = 8
@@ -8,4 +8,5 @@ latent_dim = 100
 img_size = 32
 channels = 1
 clamp = 0.01 #wgan使用
-n_critic = 6
+n_critic = 5
+n_classes = 10

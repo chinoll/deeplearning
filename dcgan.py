@@ -16,7 +16,7 @@ import visdom
 from config import *
 from utils import *
 os.makedirs("images",exist_ok=True)
-
+from gradnorm import normalize_gradient
 class Generator(nn.Module):
     def __init__(self):
         super(Generator, self).__init__()
@@ -92,7 +92,7 @@ g_optimizer = torch.optim.Adam(generator.parameters(), lr=lr, betas=(b1, b2))
 
 Tensor = torch.cuda.FloatTensor
 
-adv_loss = torch.nn.BCELoss()
+adv_loss = torch.nn.BCEWithLogitsLoss()
 
 for epoch in range(epochs):
     for i, (imgs,_) in enumerate(dataloaer):
@@ -106,19 +106,22 @@ for epoch in range(epochs):
         gen_imgs = generator(noise)
         # Train discriminator
         d_optimizer.zero_grad()
-        fake_loss = adv_loss(discriminator(gen_imgs.detach()), fake)
-        real_loss = adv_loss(discriminator(real_imgs), valid)
+        pred_real = discriminator(real_imgs)
+        pred_fake = discriminator(gen_imgs.detach())
+        fake_loss = adv_loss(pred_fake, fake)
+        real_loss = adv_loss(pred_real, valid)
         d_loss = (real_loss + fake_loss) / 2
         d_loss.backward()
         d_optimizer.step()
 
         # Train generator
+        gen_imgs = generator(noise)
         g_loss = adv_loss(discriminator(gen_imgs), valid)
         g_loss.backward()
         g_optimizer.step()
 
 
-        print("g_loss",g_loss.item(),"d_loss",d_loss.item())
+    print("g_loss",g_loss.item(),"d_loss",d_loss.item())
     vis.line(X=torch.FloatTensor([epoch]), Y=torch.FloatTensor([g_loss.item()]), win='g loss', update='append' if i> 0 else None)
     vis.line(X=torch.FloatTensor([epoch]), Y=torch.FloatTensor([d_loss.item()]), win='d loss', update='append' if i> 0 else None)
     vis.images(gen_imgs, win='gen', opts=dict(title='Generated Images'))
