@@ -72,13 +72,7 @@ discriminator.cuda()
 generator.apply(weights_init_normal)
 discriminator.apply(weights_init_normal)
 vis = visdom.Visdom(env='wgan')
-dataloader = DataLoader(datasets.MNIST('./images', train=True, download=True,
-                                        transform=transforms.Compose([
-                                            transforms.Resize(img_size),
-                                            transforms.ToTensor(),
-                                            transforms.Normalize((0.5), (0.5))
-                                        ])),
-                                        batch_size=batch_size, shuffle=True, num_workers=n_cpu)
+dataloader = load_MNIST(batch_size,n_cpu,img_size)
 
 d_optimizer = torch.optim.RMSprop(discriminator.parameters(), lr=lr)
 g_optimizer = torch.optim.RMSprop(generator.parameters(), lr=lr)
