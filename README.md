@@ -24,3 +24,7 @@
 ## Boundary Equilibrium GAN(BEGAN)
 ![began](https://github.com/chinoll/deeplearning/raw/master/imgs/began.png) <br>
 感觉和前面的模型相比，没什么改进，就是模型会很快的收敛到不错的结果 <br>
+
+## Least Squares GAN(LSGAN)
+![lsgan](https://github.com/chinoll/deeplearning/raw/master/imgs/lsgan.png) <br>
+收敛的很快，如果去掉生成器的batchnorm层，会收敛的慢一点,生成的图片的质量一般 <br>
