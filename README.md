@@ -28,3 +28,7 @@
 ## Least Squares GAN(LSGAN)
 ![lsgan](https://github.com/chinoll/deeplearning/raw/master/imgs/lsgan.png) <br>
 收敛的很快，如果去掉生成器的batchnorm层，会收敛的慢一点,生成的图片的质量一般 <br>
+
+## softmax GAN
+![softmaxgan](https://github.com/chinoll/deeplearning/raw/master/imgs/softmaxgan.png) <br>
+收敛很快，没看出和其他模型有什么区别 <br>
