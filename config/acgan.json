@@ -1,0 +1,13 @@
+{
+    "b1":0.5,
+    "b2":0.999,
+    "batch_size":256,
+    "channels":1,
+    "epochs":200,
+    "img_size":32,
+    "latent_dim":100,
+    "lr":0.0002,
+    "n_cpu":8,
+    "weight_init_function":"normal",
+    "n_classes":10
+}

@@ -5,7 +5,7 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from torchvision import datasets
 
-def weights_init_normal(m):
+def normal_init(m):
     classname = m.__class__.__name__
     if classname.find("Conv") != -1:
         torch.nn.init.normal_(m.weight.data, 0.0, 0.02)
@@ -21,7 +21,23 @@ def kaiming_init(m):
         torch.nn.init.constant_(m.weight.data, 1.0)
         torch.nn.init.constant_(m.bias.data, 0.0)
 
-def load_MNIST(batch_size,n_cpu,img_size):
+def weights_init(method):
+    def init(m):
+        if method == 'kaiming':
+            kaiming_init(m)
+        elif method == 'normal':
+            normal_init(m)
+        else:
+            raise Exception("init method error")
+    return init
+
+def load_dataset(name,**kwargs):
+    if name == 'MNIST':
+        return load_MNIST(**kwargs)
+    else:
+        raise Exception("load dataset error")
+
+def load_MNIST(batch_size,n_cpu,img_size,**kwargs):
     return DataLoader(datasets.MNIST('./images', train=True, download=True,
                                         transform=transforms.Compose([
                                             transforms.Resize(img_size),
